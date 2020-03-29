@@ -19,10 +19,12 @@ exports.start = async(req, res, next)=>{
     var py_exec_path = path.join(process.env.APPDIR, "plugins", 'speedtest', 'scripts', 'speedtest.py')
     var { stdout, stderr } = spawn('python', [py_exec_path])
     stdout.on('data', d => {
+      d = d || ""
       admin_socket.emitAdmin(e, d.toString())
     })
 
     var onEnd = (d)=>{
+      d = d || ""
       running = false
       admin_socket.emitAdmin(`${e}:end`)
       console.log(d.toString())
@@ -32,6 +34,7 @@ exports.start = async(req, res, next)=>{
     stdout.on('exit', onEnd)
 
     stderr.on('data', (d)=>{
+      d = d || ""
       running = false
       admin_socket.emitAdmin(`${e}:error`, d.toString())
     })

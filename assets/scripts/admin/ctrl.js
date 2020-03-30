@@ -13,15 +13,18 @@
     })
     $scope.running = false;
     $scope.show_terminal = false
+    $scope.payload = {}
     SpeedTestService.get().then(function(res){
       var data = res.data || {}
+      $scope.servers = data.servers
+      $scope.payload.server_id = ($scope.servers[0]||{}).id
       $scope.running = data.running
       $scope.show_terminal = $scope.running
     })
     $scope.speedtest = function(){
       $scope.show_terminal = true
       $scope.running = true
-      SpeedTestService.start().then(function(){
+      SpeedTestService.start($scope.payload.server_id).then(function(){
 
       })
     }

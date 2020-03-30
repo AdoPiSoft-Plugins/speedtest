@@ -14,8 +14,8 @@
         return $http.get('/speedtest-plugin').catch(CatchHttpError);
       }
 
-      this.start = function(){
-        return $http.post('/speedtest-plugin/start').catch(CatchHttpError);
+      this.start = function(server_id){
+        return $http.post('/speedtest-plugin/start', {server_id: server_id}).catch(CatchHttpError);
       }
     }
   ])

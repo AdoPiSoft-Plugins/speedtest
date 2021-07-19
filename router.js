@@ -1,6 +1,4 @@
-'use strict'
-
-var core = require('../core')
+var core = require('plugin-core')
 var { router, middlewares } = core
 var { express, bodyParser } = middlewares
 var speedtest_ctrl = require('./controllers/speedtest_ctrl')

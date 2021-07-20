@@ -4,7 +4,7 @@
   .config(function($stateProvider) {
     $stateProvider
     .state('plugins.speedtest', {
-      templateUrl : "/plugins/speedtest/views/index.html",
+      templateUrl : "/public/plugins/speedtest/views/index.html",
       controller: 'SpeedTestCtrl',
       url: '/plugins/speedtest',
       title: 'Speed Test',

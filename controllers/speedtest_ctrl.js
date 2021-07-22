@@ -30,7 +30,7 @@ exports.start = async (req, res, next) => {
   var {server_id} = req.body
   try {
     running = true
-    var py_exec_path = path.join(process.env.APPDIR, 'plugins', 'speedtest', 'scripts', 'speedtest.py')
+    var py_exec_path = path.join(process.env.APPDIR, 'node_modules', 'speedtest', 'scripts', 'speedtest.py')
     var args = [py_exec_path]
     if (server_id) {
       args.push(`--server=${server_id}`)

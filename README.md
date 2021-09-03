@@ -1,6 +1,11 @@
-1.3.2
+1.3.3
 ===================
 * Fix error caused by downtime of specific server
+
+
+1.3.2
+===================
+* Compatibility update for AdoPiSoft V5
 
 
 1.3.1

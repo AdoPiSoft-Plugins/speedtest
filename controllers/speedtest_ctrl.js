@@ -11,7 +11,7 @@ var httpGet = promisify(request.get)
 var running = false
 var e = 'terminal:output'
 var servers_api_url = 'https://www.speedtest.net/api/js/servers?engine=js&limit=50&https_functional=true'
-var py_exec_path = path.join(process.env.APPDIR, 'node_modules', 'speedtest', 'scripts', 'speedtest.py')
+var py_exec_path = path.join(__dirname, 'scripts', 'speedtest.py')
 
 exports.get = async (req, res, next) => {
   var servers = []

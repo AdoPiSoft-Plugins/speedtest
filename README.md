@@ -1,3 +1,8 @@
+1.3.2
+===================
+* Fix error caused by downtime of specific server
+
+
 1.3.1
 ===================
 * Fix error caused by an update from Speedtest API

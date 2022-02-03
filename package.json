@@ -3,24 +3,21 @@
   "version": "1.3.1",
   "description": "Use this tool to check the raw internet speed of your AdoPiSoft machine. This is powered by Speedtest.net.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "python $APPDIR/python-scripts/plugin-postinstall.py $(basename $(pwd)) $(pwd)"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/adopisowifi/speedtest-plugin.git"
-  },
-  "keywords": [
-    "ado",
-    "speedtest-plugin"
-  ],
+  "repository": "git@github.com:AdoPiSoft-Plugins/speedtest.git",
   "author": "arnel.lenteria@gmail.com",
   "license": "ISC",
-  "bugs": {
-    "url": "https://bitbucket.org/adopisowifi/speedtest-plugin/issues"
+  "metadata": {
+    "admin" : {
+      "navigation":[
+        {
+          "parentstate": "plugins",
+          "icon": "fa fa-wifi",
+          "text": "Speedtest",
+          "href": "plugins.speedtest"
+        }
+      ]
+    }
   },
-  "homepage": "https://bitbucket.org/adopisowifi/speedtest-plugin#readme",
   "dependencies": {
     "request": "^2.88.2"
   }

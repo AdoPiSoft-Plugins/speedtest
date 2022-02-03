@@ -1,1 +1,2 @@
-var router=require("./router");var{app}=require("plugin-core");module.exports={async init(){app.use(router)}};
+console.log('initialized_speedtest_plugin')
+module.exports = require('./app')

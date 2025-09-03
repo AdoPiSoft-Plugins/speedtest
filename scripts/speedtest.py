@@ -36,6 +36,11 @@ except ImportError:
     gzip = None
     GZIP_BASE = object
 
+try:
+    dt = datetime.datetime.now(datetime.UTC)
+except AttributeError:
+    dt = datetime.datetime.now(datetime.timezone.utc)
+
 __version__ = '2.1.2'
 
 
@@ -763,13 +768,20 @@ def get_attributes_by_tag_name(dom, tag_name):
     elem = dom.getElementsByTagName(tag_name)[0]
     return dict(list(elem.attributes.items()))
 
+def is_event_set(event):
+    if hasattr(event, 'is_set'):
+        return event.is_set()
+    elif hasattr(event, 'isSet'):
+        return event.isSet()
+    else:
+        raise AttributeError("The event object does not have 'is_set' or 'isSet' methods.")
 
 def print_dots(shutdown_event):
     """Built in callback function used by Thread classes for printing
     status
     """
     def inner(current, total, start=False, end=False):
-        if shutdown_event.isSet():
+        if is_event_set(shutdown_event):
             return
 
         sys.stdout.write('.')
@@ -808,7 +820,7 @@ class HTTPDownloader(threading.Thread):
         try:
             if (timeit.default_timer() - self.starttime) <= self.timeout:
                 f = self._opener(self.request)
-                while (not self._shutdown_event.isSet() and
+                while (not is_event_set(self._shutdown_event) and
                         (timeit.default_timer() - self.starttime) <=
                         self.timeout):
                     self.result.append(len(f.read(10240)))
@@ -862,7 +874,7 @@ class HTTPUploaderData(object):
 
     def read(self, n=10240):
         if ((timeit.default_timer() - self.start) <= self.timeout and
-                not self._shutdown_event.isSet()):
+                not is_event_set(self._shutdown_event)):
             chunk = self.data.read(n)
             self.total.append(len(chunk))
             return chunk
@@ -900,7 +912,7 @@ class HTTPUploader(threading.Thread):
         request = self.request
         try:
             if ((timeit.default_timer() - self.starttime) <= self.timeout and
-                    not self._shutdown_event.isSet()):
+                    not is_event_set(self._shutdown_event)):
                 try:
                     f = self._opener(request)
                 except TypeError:
@@ -944,7 +956,7 @@ class SpeedtestResults(object):
         self.client = client or {}
 
         self._share = None
-        self.timestamp = '%sZ' % datetime.datetime.utcnow().isoformat()
+        self.timestamp = f"{dt.replace(tzinfo=None).isoformat()}Z"
         self.bytes_received = 0
         self.bytes_sent = 0
 
